@@ -12,16 +12,18 @@
     <h2>Sistema de Ventas</h2>
     <p>Inicia sesión para continuar</p>
 
-    <div class="campo">
-        <label>Usuario</label>
-        <input type="text" placeholder="Ingresa tu usuario" />
-    </div>
-    <div class="campo">
-        <label>Contraseña</label>
-        <input type="password" placeholder="••••••••" />
-    </div>
+    <form action="/login" method="post">
+        <div class="campo">
+            <label>Usuario</label>
+            <input type="text" name="usuario" placeholder="Ingresa tu usuario" required />
+        </div>
+        <div class="campo">
+            <label>Contraseña</label>
+            <input type="password" name="clave" placeholder="••••••••" required />
+        </div>
 
-    <button class="btn-login">Iniciar sesión</button>
+        <button type="submit" class="btn-login">Iniciar sesión</button>
+    </form>
 
     <div class="footer-link">
         ¿Olvidaste tu contraseña? <a href="#">Recuperar</a>
