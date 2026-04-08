@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle Venta</title>
+    <link rel="stylesheet" th:href="@{/crud.css}">
+</head>
+<body>
+
+<nav>
+    <span class="brand">Sistema de Ventas</span>
+    <a href="/home" class="back">← Volver al inicio</a>
+</nav>
+
+<div class="contenido">
+    <h2>Detalle de Ventas</h2>
+
+    <div class="buscador">
+        <input type="text" id="buscar" placeholder="Buscar detalle..." onkeyup="buscar()">
+        <button onclick="buscar()">Buscar</button>
+    </div>
+
+    <button class="btn-agregar" onclick="abrirModal()">+ Agregar detalle</button>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Venta ID</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody id="tabla">
+        <tr>
+            <td>1</td><td>1</td><td>Laptop</td><td>1</td><td>Q5,500.00</td>
+            <td>
+                <button class="btn-editar" onclick="abrirModal()">Editar</button>
+                <button class="btn-eliminar">Eliminar</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal-fondo" id="modal">
+    <div class="modal">
+        <h3>Agregar / Editar Detalle</h3>
+        <div class="campo"><label>Venta ID</label><input type="number" placeholder="ID de la venta"></div>
+        <div class="campo"><label>Producto</label><input type="text" placeholder="Nombre del producto"></div>
+        <div class="campo"><label>Cantidad</label><input type="number" placeholder="0"></div>
+        <div class="campo"><label>Subtotal</label><input type="number" placeholder="0.00"></div>
+        <div class="modal-botones">
+            <button class="btn-guardar">Guardar</button>
+            <button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function abrirModal() { document.getElementById('modal').classList.add('activo'); }
+    function cerrarModal() { document.getElementById('modal').classList.remove('activo'); }
+    function buscar() {
+        const texto = document.getElementById('buscar').value.toLowerCase();
+        document.querySelectorAll('#tabla tr').forEach(fila => {
+            fila.style.display = fila.textContent.toLowerCase().includes(texto) ? '' : 'none';
+        });
+    }
+</script>
+</body>
+</html>

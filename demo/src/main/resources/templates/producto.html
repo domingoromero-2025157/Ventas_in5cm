@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+    <link rel="stylesheet" th:href="@{/crud.css}">
+</head>
+<body>
+
+<nav>
+    <span class="brand">Sistema de Ventas</span>
+    <a href="/home" class="back">← Volver al inicio</a>
+</nav>
+
+<div class="contenido">
+    <h2>Productos</h2>
+
+    <div class="buscador">
+        <input type="text" id="buscar" placeholder="Buscar producto..." onkeyup="buscar()">
+        <button onclick="buscar()">Buscar</button>
+    </div>
+
+    <button class="btn-agregar" onclick="abrirModal()">+ Agregar producto</button>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody id="tabla">
+        <tr>
+            <td>1</td><td>Laptop</td><td>Q5,500.00</td><td>10</td>
+            <td>
+                <button class="btn-editar" onclick="abrirModal()">Editar</button>
+                <button class="btn-eliminar">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td><td>Mouse</td><td>Q150.00</td><td>50</td>
+            <td>
+                <button class="btn-editar" onclick="abrirModal()">Editar</button>
+                <button class="btn-eliminar">Eliminar</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal-fondo" id="modal">
+    <div class="modal">
+        <h3>Agregar / Editar Producto</h3>
+        <div class="campo"><label>Nombre</label><input type="text" placeholder="Nombre del producto"></div>
+        <div class="campo"><label>Precio</label><input type="number" placeholder="0.00"></div>
+        <div class="campo"><label>Stock</label><input type="number" placeholder="0"></div>
+        <div class="modal-botones">
+            <button class="btn-guardar">Guardar</button>
+            <button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function abrirModal() { document.getElementById('modal').classList.add('activo'); }
+    function cerrarModal() { document.getElementById('modal').classList.remove('activo'); }
+    function buscar() {
+        const texto = document.getElementById('buscar').value.toLowerCase();
+        document.querySelectorAll('#tabla tr').forEach(fila => {
+            fila.style.display = fila.textContent.toLowerCase().includes(texto) ? '' : 'none';
+        });
+    }
+</script>
+</body>
+</html>
