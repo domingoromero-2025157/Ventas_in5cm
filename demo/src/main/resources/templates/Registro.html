@@ -97,12 +97,11 @@
             <span th:text="${success}"></span>
         </div>
 
-        <form th:action="@{/registro}" method="post">
+        <form action="/registro" method="post">
             <input type="text" name="usuario" placeholder="Usuario" required>
             <input type="password" name="password" placeholder="Contraseña" required>
-            <button type="submit">Registrarse </button>
+            <button type="submit">Registrarse</button>
         </form>
-
         <div class="switch">
             <a th:href="@{/}">¿Ya tienes cuenta? Inicia sesión</a>
         </div>

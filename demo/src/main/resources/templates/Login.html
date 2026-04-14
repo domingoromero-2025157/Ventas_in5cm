@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Sistema de Ventas</title>
-    <link rel="stylesheet" th:href="@{/Login.css}">
+    <link rel="stylesheet" th:href="@{/login.css}">
 </head>
 <body>
 
@@ -13,16 +13,9 @@
     <p>Inicia sesión para continuar</p>
 
     <form action="/login" method="post">
-        <div class="campo">
-            <label>Usuario</label>
-            <input type="text" name="usuario" placeholder="Ingresa tu usuario" required />
-        </div>
-        <div class="campo">
-            <label>Contraseña</label>
-            <input type="password" name="clave" placeholder="••••••••" required />
-        </div>
-
-        <button type="submit" class="btn-login">Iniciar sesión</button>
+        <input type="text" name="usuario" placeholder="Usuario" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <button type="submit">Iniciar sesión</button>
     </form>
 
     <div class="footer-link">

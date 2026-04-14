@@ -25,10 +25,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Usuario login(String username, String password) {
 
-        Usuario u = repo.findByUsername(username);
+        Optional<Usuario> optionalUser = repo.findByUsername(username);
 
-        if (u != null && encoder.matches(password, u.getPassword())) {
-            return u;
+        if (optionalUser.isPresent()) {
+            Usuario u = optionalUser.get();
+
+            if (encoder.matches(password, u.getPassword())) {
+                return u;
+            }
         }
 
         return null;
@@ -37,27 +41,29 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Usuario registrar(String username, String password) {
 
-        if (repo.findByUsername(username) != null) {
+        Optional<Usuario> existente = repo.findByUsername(username);
+
+        if (existente.isPresent()) {
             return null;
         }
 
         Usuario u = new Usuario();
         u.setUsername(username);
         u.setPassword(encoder.encode(password));
+        u.setEmail(username + "@correo.com"); // ajusta si tienes formulario
+        u.setRol("USER");
+        u.setEstado(1);
 
         return repo.save(u);
     }
 
     @Override
     public Usuario getUsuarioById(Integer id) {
-
-        Optional<Usuario> user = repo.findById(id);
-        return user.orElse(null);
+        return repo.findById(id).orElse(null);
     }
 
     @Override
     public Usuario saveUsuario(Usuario usuario) {
-
         usuario.setPassword(encoder.encode(usuario.getPassword()));
         return repo.save(usuario);
     }

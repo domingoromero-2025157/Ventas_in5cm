@@ -1,7 +1,7 @@
 package com.Ventas_in5cm.demo.Controller;
 
 import com.Ventas_in5cm.demo.Entity.Usuario;
-import com.Ventas_in5cm.demo.Repository.UsuarioRepository;
+import com.Ventas_in5cm.demo.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +13,13 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    private UsuarioRepository service;
+    private UsuarioService service;
 
-    @GetMapping("/lista")
+    @GetMapping("/home")
     public String listar(Model model) {
         List<Usuario> lista = service.getAllUsuarios();
         model.addAttribute("usuarios", lista);
-        return "lista";
+        return "home";
     }
 
     @GetMapping("/clientes")

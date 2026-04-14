@@ -5,23 +5,16 @@ import com.Ventas_in5cm.demo.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
-
+import org.springframework.web.bind.annotation.*;
 @Controller
 public class LoginController {
 
     @Autowired
     private UsuarioService service;
 
-    // LOGIN
     @GetMapping("/")
     public String login() {
-        return "Login";
+        return "login"; // minúscula
     }
 
     @PostMapping("/login")
@@ -35,20 +28,7 @@ public class LoginController {
             return "redirect:/home";
         } else {
             model.addAttribute("error", "Credenciales incorrectas");
-            return "Login";
+            return "login"; // 🔥 corregido
         }
-    }
-
-    // REGISTRO
-
-
-    // LISTA DE USUARIOS
-
-
-    // ELIMINAR USUARIO
-    @GetMapping("/eliminar/{id}")
-    public String eliminar(@PathVariable Integer id) {
-        service.deleteUsuario(id);
-        return "redirect:/lista";
     }
 }
