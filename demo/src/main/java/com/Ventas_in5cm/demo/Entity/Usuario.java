@@ -10,7 +10,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codido_usuario") // ⚠️ se deja así porque así está en tu BD
+    @Column(name = "codigo_usuario")
     private Integer codigoUsuario;
 
     @NotBlank(message = "El username no debe ir vacío")
@@ -18,7 +18,7 @@ public class Usuario {
     private String username;
 
     @NotBlank(message = "El password no debe ir vacío")
-    @Column(name = "pasword") // ⚠️ igual que en tu BD
+    @Column(name = "password")
     private String password;
 
     @NotBlank(message = "El email no debe ir vacío")

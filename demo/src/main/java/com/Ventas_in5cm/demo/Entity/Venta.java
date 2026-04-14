@@ -2,7 +2,6 @@ package com.Ventas_in5cm.demo.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-
 import java.time.LocalDate;
 
 @Entity
@@ -14,27 +13,25 @@ public class Venta {
     @Column(name = "codigo_venta")
     private Integer codigoVenta;
 
-    @NotNull(message = "El campo no debe ir vacío")
-    @Column(name = "fecha_venta")
+    @NotNull
+    @Column(name = "fecha_ventas")
     private LocalDate fechaVenta;
 
-    @NotNull(message = "El campo no debe ir vacío")
+    @NotNull
     @Column(name = "total")
-    private Float total;
+    private Double total;
 
-    @NotNull(message = "El campo no debe ir vacío")
+    @NotNull
     @Column(name = "estado")
     private Integer estado;
 
-    @NotNull(message = "El campo no debe ir vacío")
+    @NotNull
     @Column(name = "clientes_dpi_cliente")
     private Integer clientesDpiCliente;
 
-    @NotNull(message = "El campo no debe ir vacío")
+    @NotNull
     @Column(name = "usuarios_codigo_usuario")
     private Integer usuariosCodigoUsuario;
-
-    // GETTERS Y SETTERS
 
     public Integer getCodigoVenta() {
         return codigoVenta;
@@ -52,11 +49,11 @@ public class Venta {
         this.fechaVenta = fechaVenta;
     }
 
-    public Float getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(Float total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "DetalleVenta")
+@Table(name = "detalleventa")
 public class DetalleVenta {
 
     @Id
@@ -24,27 +24,21 @@ public class DetalleVenta {
     @Column(name = "subtotal")
     private Double subtotal;
 
-    // 🔥 RELACIÓN CON PRODUCTO
     @ManyToOne
-    @JoinColumn(name = "Productos_codigos_producto") // EXACTO como tu BD
+    @JoinColumn(name = "productos_codigo_producto")
     private Producto producto;
 
-    // 🔥 RELACIÓN CON CLIENTE
     @ManyToOne
-    @JoinColumn(name = "Clientes_dpi_cliente")
+    @JoinColumn(name = "clientes_dpi_cliente")
     private Cliente cliente;
 
-    // 🔥 RELACIÓN CON USUARIO
     @ManyToOne
     @JoinColumn(name = "usuarios_codigo_usuario")
     private Usuario usuario;
 
-    // 🔥 RELACIÓN CON VENTA
     @ManyToOne
-    @JoinColumn(name = "Ventas_codigo_venta")
+    @JoinColumn(name = "ventas_codigo_venta")
     private Venta venta;
-
-    // GETTERS Y SETTERS
 
     public Integer getCodigoDetalleVenta() {
         return codigoDetalleVenta;

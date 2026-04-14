@@ -5,10 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplicatopn implements CommandLineRunner {
+public class DemoApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplicatopn.class, args);
+        SpringApplication.run(DemoApplication.class, args);
     }
 
     @Override
@@ -16,4 +16,3 @@ public class DemoApplicatopn implements CommandLineRunner {
         System.out.println("api text");
     }
 }
-

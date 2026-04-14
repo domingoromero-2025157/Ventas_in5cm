@@ -1,3 +1,4 @@
+/* Reset */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -7,42 +8,46 @@ body {
     min-height: 100vh;
 }
 
-/* Barra de navegación más alta */
+/* Barra de navegación */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 40px 60px; /* más alto y ancho */
+    padding: 30px 50px;
     background: #1a1d2e;
     border-bottom: 2px solid #2a2d3a;
-    height: 90px; /* altura fija */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 90px;
 }
 
 .logo {
     color: #7c8cf8;
-    font-size: 35px; /* más grande */
+    font-size: 35px;
     font-weight: bold;
 }
 
 /* Menú horizontal */
 .menu {
     display: flex;
-    gap: 25px; /* más espacio entre botones */
+    gap: 25px;
 }
 
 .menu-btn {
-    padding: 18px 30px; /* botones más grandes */
+    padding: 15px 25px;
     background: #1a1d2e;
     color: #c5c8e8;
     text-decoration: none;
     border: 2px solid #2a2d3a;
     border-radius: 8px;
-    font-size: 20px; /* texto más grande */
+    font-size: 18px;
     font-weight: bold;
-    transition: background 0.2s, border-color 0.2s;
+    transition: all 0.2s;
 }
 
-.menu-btn:hover {
+.menu-btn:hover,
+.menu-btn.active {
     background: #4f56d6;
     border-color: #4f56d6;
     color: #fff;
@@ -51,10 +56,56 @@ body {
 /* Contenido principal */
 .home-container {
     text-align: center;
-    margin-top: 120px; /* más separación por barra más alta */
+    margin-top: 120px;
 }
 
 .home-container p {
     color: #6b6f84;
-    font-size: 18px; /* texto más grande */
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+/* Botones de módulos */
+.module-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.module-buttons a {
+    padding: 20px 40px;
+    border-radius: 10px;
+    border: 2px solid #2a2d3a;
+    background: #1a1d2e;
+    color: #c5c8e8;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    transition: all 0.2s;
+}
+
+.module-buttons a:hover {
+    background: #4f56d6;
+    border-color: #4f56d6;
+    color: #fff;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 20px;
+        height: auto;
+    }
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+    }
+    .module-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
 }

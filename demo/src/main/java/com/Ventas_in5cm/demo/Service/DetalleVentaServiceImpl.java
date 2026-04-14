@@ -54,10 +54,8 @@ public class DetalleVentaServiceImpl implements DetalleVentaService {
         existente.setPrecioUnitario(detalleVenta.getPrecioUnitario());
         existente.setSubtotal(detalleVenta.getSubtotal());
 
-
-
         Producto producto = productoRepository.findById(
-                detalleVenta.getProducto().getCodigoProductos()
+                detalleVenta.getProducto().getCodigoProducto()
         ).orElseThrow(() -> new RuntimeException("Producto no existe"));
 
         Cliente cliente = clienteRepository.findById(

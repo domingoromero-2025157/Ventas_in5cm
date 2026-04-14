@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Registro</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
     <style>
         body {
             height: 100vh;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -27,7 +27,7 @@
 
         .left {
             width: 40%;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            background: linear-gradient(135deg, #4CAF50, #2ecc71);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -56,7 +56,7 @@
             padding: 12px;
             border-radius: 10px;
             border: none;
-            background: #4CAF50;
+            background: #2575fc;
             color: white;
             font-weight: bold;
             cursor: pointer;
@@ -72,8 +72,8 @@
             font-size: 14px;
         }
 
-        .error {
-            background: #ff4b5c;
+        .success {
+            background: #4CAF50;
             color: white;
             padding: 10px;
             border-radius: 8px;
@@ -86,25 +86,25 @@
 <div class="card">
 
     <div class="left">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png">
     </div>
 
     <div class="right">
 
-        <h2>Iniciar Sesión</h2>
+        <h2>Registro</h2>
 
-        <div th:if="${error}" class="error">
-            <span th:text="${error}"></span>
+        <div th:if="${success}" class="success">
+            <span th:text="${success}"></span>
         </div>
 
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/registro}" method="post">
             <input type="text" name="usuario" placeholder="Usuario" required>
             <input type="password" name="password" placeholder="Contraseña" required>
-            <button type="submit">Ingresar</button>
+            <button type="submit">Registrarse</button>
         </form>
 
         <div class="switch">
-            <a th:href="@{/registro}">¿No tienes cuenta? Regístrate</a>
+            <a th:href="@{/usuario}">¿Ya tienes cuenta? Inicia sesión</a>
         </div>
 
     </div>

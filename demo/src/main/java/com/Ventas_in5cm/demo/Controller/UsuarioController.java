@@ -2,62 +2,78 @@ package com.Ventas_in5cm.demo.Controller;
 
 import com.Ventas_in5cm.demo.Entity.Usuario;
 import com.Ventas_in5cm.demo.Service.UsuarioService;
-import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("api/usuarios")
+@Controller
 public class UsuarioController {
 
-    private final UsuarioService usuarioService;
+    @Autowired
+    private UsuarioService service;
 
-    public UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
+    // LOGIN (CORREGIDO)
+    @GetMapping("/usuario")
+    public String login() {
+        return "usuario";
     }
 
-    @GetMapping
-    public List<Usuario> getAllUsuarios() {
-        return usuarioService.getAllUsuarios();
-    }
+    @PostMapping("/usuario/login")
+    public String validar(@RequestParam String usuario,
+                          @RequestParam String password,
+                          Model model) {
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getUsuarioById(@PathVariable Integer id) {
-        try {
-            return ResponseEntity.ok(usuarioService.getUsuarioById(id));
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        Usuario u = service.login(usuario, password);
+
+        if (u != null) {
+            return "redirect:/lista";
+        } else {
+            model.addAttribute("error", "Credenciales incorrectas");
+            return "usuario";
         }
     }
 
-    @PostMapping
-    public ResponseEntity<?> createUsuario(@Valid @RequestBody Usuario usuario) {
-        try {
-            return new ResponseEntity<>(usuarioService.saveUsuario(usuario), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    // REGISTRO
+    @GetMapping("/registro")
+    public String registro() {
+        return "registro";
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateUsuario(@PathVariable Integer id, @Valid @RequestBody Usuario usuario) {
-        try {
-            return ResponseEntity.ok(usuarioService.updateUsuario(id, usuario));
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    @PostMapping("/registro")
+    public String guardar(@RequestParam String usuario,
+                          @RequestParam String password,
+                          Model model) {
+
+        Usuario u = service.registrar(usuario, password);
+
+        if (u == null) {
+            model.addAttribute("error", "Usuario ya existe");
+            return "registro";
         }
+
+        return "redirect:/usuario";
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUsuario(@PathVariable Integer id) {
-        try {
-            usuarioService.deleteUsuario(id);
-            return ResponseEntity.ok("Usuario eliminado correctamente");
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+    // LISTA
+    @GetMapping("/lista")
+    public String listar(Model model) {
+
+        List<Usuario> lista = service.getAllUsuarios();
+
+        model.addAttribute("usuarios", lista);
+        return "lista";
+    }
+
+    // ELIMINAR
+    @PostMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable Integer id) {
+
+        service.deleteUsuario(id);
+
+        return "redirect:/lista";
     }
 }

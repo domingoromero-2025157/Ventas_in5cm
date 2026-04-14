@@ -7,6 +7,10 @@ public interface UsuarioService {
 
     List<Usuario> getAllUsuarios();
 
+    Usuario login(String username, String password);
+
+    Usuario registrar(String username, String password);
+
     Usuario getUsuarioById(Integer id);
 
     Usuario saveUsuario(Usuario usuario);

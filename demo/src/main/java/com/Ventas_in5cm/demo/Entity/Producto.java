@@ -5,13 +5,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Productos")
+@Table(name = "productos")
 public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_productos")
-    private Integer codigoProductos;
+    @Column(name = "codigo_producto")
+    private Integer codigoProducto;
 
     @NotBlank(message = "El nombre no debe ir vacío")
     @Column(name = "nombre_producto")
@@ -29,14 +29,12 @@ public class Producto {
     @Column(name = "estado")
     private Integer estado;
 
-    // GETTERS Y SETTERS
-
-    public Integer getCodigoProductos() {
-        return codigoProductos;
+    public Integer getCodigoProducto() {
+        return codigoProducto;
     }
 
-    public void setCodigoProductos(Integer codigoProductos) {
-        this.codigoProductos = codigoProductos;
+    public void setCodigoProducto(Integer codigoProducto) {
+        this.codigoProducto = codigoProducto;
     }
 
     public String getNombreProducto() {
