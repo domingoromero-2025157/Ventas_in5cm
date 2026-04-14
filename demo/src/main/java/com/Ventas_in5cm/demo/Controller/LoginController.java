@@ -12,14 +12,14 @@ public class LoginController {
     @Autowired
     private UsuarioService service;
 
-    @GetMapping("/")
+    @GetMapping({"/", "/login"})
     public String login() {
-        return "login"; // minúscula
+        return "login";
     }
 
     @PostMapping("/login")
-    public String validar(@RequestParam String usuario,
-                          @RequestParam String password,
+    public String validar(@RequestParam("username") String usuario,
+                          @RequestParam("password") String password,
                           Model model) {
 
         Usuario u = service.login(usuario, password);
@@ -28,7 +28,7 @@ public class LoginController {
             return "redirect:/home";
         } else {
             model.addAttribute("error", "Credenciales incorrectas");
-            return "login"; // 🔥 corregido
+            return "login";
         }
     }
 }

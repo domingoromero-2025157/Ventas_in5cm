@@ -1,115 +1,92 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Usuarios</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            height: 100vh;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .card {
-            display: flex;
-            width: 700px;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .left {
-            width: 40%;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .left img {
-            width: 120px;
-        }
-
-        .right {
-            width: 60%;
-            padding: 40px;
-            text-align: center;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: none;
-            background: #4CAF50;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .switch {
-            margin-top: 15px;
-        }
-
-        .switch a {
-            text-decoration: none;
-            color: #2575fc;
-            font-size: 14px;
-        }
-
-        .error {
-            background: #ff4b5c;
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/crud.css}">
 </head>
 <body>
 
-<div class="card">
+<!-- NAVBAR -->
+<nav>
+    <span class="brand">Sistema de Ventas</span>
+    <a href="/home" class="back">← Volver al inicio</a>
+</nav>
 
-    <div class="left">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
-    </div>
+<div class="contenido">
 
-    <div class="right">
+    <h2>Usuarios</h2>
 
-        <h2>Iniciar Sesión</h2>
+    <!-- BOTÓN AGREGAR -->
+    <button class="btn-agregar" onclick="abrirModal()">+ Agregar usuario</button>
 
-        <div th:if="${error}" class="error">
-            <span th:text="${error}"></span>
-        </div>
+    <!-- TABLA USUARIOS -->
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
 
-        <form th:action="@{/login}" method="post">
-            <input type="text" name="usuario" placeholder="Usuario" required>
-            <input type="password" name="password" placeholder="Contraseña" required>
-            <button type="submit">Ingresar</button>
-        </form>
-
-        <div class="switch">
-            <a th:href="@{/registro}">¿No tienes cuenta? Regístrate</a>
-        </div>
-
-    </div>
-
+        <tbody>
+        <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.id}"></td>
+            <td th:text="${usuario.username}"></td>
+            <td th:text="${usuario.email}"></td>
+            <td th:text="${usuario.rol}"></td>
+            <td th:text="${usuario.estado}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+
+<!-- MODAL -->
+<div class="modal-fondo" id="modal">
+    <div class="modal">
+        <h3>Agregar / Editar Usuario</h3>
+
+        <div class="campo">
+            <label>Usuario</label>
+            <input type="text" placeholder="Usuario">
+        </div>
+
+        <div class="campo">
+            <label>Email</label>
+            <input type="email" placeholder="Correo">
+        </div>
+
+        <div class="campo">
+            <label>Rol</label>
+            <input type="text" placeholder="USER / ADMIN">
+        </div>
+
+        <div class="campo">
+            <label>Estado</label>
+            <input type="number" placeholder="1 = activo / 0 = inactivo">
+        </div>
+
+        <div class="modal-botones">
+            <button class="btn-guardar">Guardar</button>
+            <button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function abrirModal() {
+        document.getElementById('modal').classList.add('activo');
+    }
+
+    function cerrarModal() {
+        document.getElementById('modal').classList.remove('activo');
+    }
+</script>
 
 </body>
 </html>

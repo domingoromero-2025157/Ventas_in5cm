@@ -28,7 +28,7 @@ public class HomeController {
     @GetMapping("/productos")
     public String productos() { return "producto"; }
 
-    @GetMapping("/usuarios")
+    @GetMapping("/home/usuarios")
     public String usuarios() { return "usuario"; }
 
     @GetMapping("/ventas")
