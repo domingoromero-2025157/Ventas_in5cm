@@ -11,6 +11,7 @@ public interface UsuarioService {
 
     Usuario registrar(String username, String password);
 
+
     Usuario getUsuarioById(Integer id);
 
     Usuario saveUsuario(Usuario usuario);
@@ -19,3 +20,4 @@ public interface UsuarioService {
 
     void deleteUsuario(Integer id);
 }
+

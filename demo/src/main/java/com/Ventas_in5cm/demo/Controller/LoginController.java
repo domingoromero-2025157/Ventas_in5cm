@@ -1,34 +1,54 @@
 package com.Ventas_in5cm.demo.Controller;
 
+import com.Ventas_in5cm.demo.Entity.Usuario;
+import com.Ventas_in5cm.demo.Service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class LoginController {
 
-    private final String USUARIO_VALIDO = "admin";
-    private final String CONTRASENA_VALIDA = "1234";
+    @Autowired
+    private UsuarioService service;
 
+    // LOGIN
     @GetMapping("/")
     public String login() {
-        return "login";
+        return "Login";
     }
 
     @PostMapping("/login")
-    public String loginPost(@RequestParam String usuario,
-                            @RequestParam String clave) {
+    public String validar(@RequestParam String usuario,
+                          @RequestParam String password,
+                          Model model) {
 
-        if (USUARIO_VALIDO.equals(usuario) && CONTRASENA_VALIDA.equals(clave)) {
+        Usuario u = service.login(usuario, password);
+
+        if (u != null) {
             return "redirect:/home";
         } else {
-            return "login";
+            model.addAttribute("error", "Credenciales incorrectas");
+            return "Login";
         }
     }
 
-    @GetMapping("/home")
-    public String home() {
-        return "home";
+    // REGISTRO
+
+
+    // LISTA DE USUARIOS
+
+
+    // ELIMINAR USUARIO
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable Integer id) {
+        service.deleteUsuario(id);
+        return "redirect:/lista";
     }
 }
