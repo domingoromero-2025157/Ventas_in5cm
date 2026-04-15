@@ -20,4 +20,3 @@ public interface UsuarioService {
 
     void deleteUsuario(Integer id);
 }
-

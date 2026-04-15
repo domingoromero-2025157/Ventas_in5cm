@@ -25,5 +25,4 @@ public class UsuarioController {
 
         return "usuarios";
     }
-    }
-
+}
