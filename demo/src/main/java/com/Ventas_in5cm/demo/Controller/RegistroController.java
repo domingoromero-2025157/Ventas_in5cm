@@ -1,35 +1,30 @@
 package com.Ventas_in5cm.demo.Controller;
 
-import com.Ventas_in5cm.demo.Entity.Usuario;
-import com.Ventas_in5cm.demo.Service.UsuarioService;
+import com.Ventas_in5cm.demo.Entity.Usuarios;
+import com.Ventas_in5cm.demo.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class RegistroController {
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioRepository usuarioRepository;
 
-    @GetMapping("/registro")
-    public String registro() {
-        return "registro";
+    @GetMapping("/Registro")
+    public String mostrarRegistro(){
+        return "register";
     }
 
-    @PostMapping("/registro")
-    public String guardar(@RequestParam String usuario,
-                          @RequestParam String password,
-                          Model model) {
+    @PostMapping("/Registro")
+    public String registrarUsuario(Usuarios usuario){
 
-        Usuario u = usuarioService.registrar(usuario, password);
+        usuario.setRol("USER");
+        usuario.setEstado(1);
 
-        if (u == null) {
-            model.addAttribute("error", "Usuario ya existe");
-            return "registro";
-        }
+        usuarioRepository.save(usuario);
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 }

@@ -1,39 +1,21 @@
 package com.Ventas_in5cm.demo.Controller;
 
-import com.Ventas_in5cm.demo.Entity.Usuario;
-import com.Ventas_in5cm.demo.Service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.List;
+import java.security.Principal;
 
 @Controller
 public class HomeController {
 
-    @Autowired
-    private UsuarioService service;
-
-    @GetMapping("/home")
-    public String listar(Model model) {
-        List<Usuario> lista = service.getAllUsuarios();
-        model.addAttribute("usuarios", lista);
-        return "home";
+    @GetMapping({"/", "/home"})
+    public String dashboard(Model model, Principal principal) {
+        if (principal != null) {
+            model.addAttribute("username", principal.getName());
+        } else {
+            model.addAttribute("username", "Usuario activo");
+        }
+        return "home"; // Nombre de tu HTML: home.html
     }
-
-    @GetMapping("/clientes")
-    public String clientes() { return "cliente"; }
-
-    @GetMapping("/productos")
-    public String productos() { return "producto"; }
-
-    @GetMapping("/home/usuarios")
-    public String usuarios() { return "usuario"; }
-
-    @GetMapping("/ventas")
-    public String ventas() { return "venta"; }
-
-    @GetMapping("/detalleVenta")
-    public String detalleVenta() { return "detalleVenta"; }
 }

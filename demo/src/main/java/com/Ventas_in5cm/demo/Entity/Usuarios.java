@@ -5,42 +5,40 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Usuarios")
-public class Usuario {
-
+@Table (name = "usuarios")
+public class Usuarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_usuario")
-    private Integer codigoUsuario;
 
-    @NotBlank(message = "El username no debe ir vacío")
+    @Column(name = "codigo_usuario")
+    private Integer codigo_usuario;
+
+    @NotBlank(message = "El campo no debe ir vacio")
     @Column(name = "username")
     private String username;
 
-    @NotBlank(message = "El password no debe ir vacío")
-    @Column(name = "password")
-    private String password;
+    @NotBlank(message = "El campo no debe ir vacio")
+    @Column(name = "pasword")
+    private String pasword;
 
-    @NotBlank(message = "El email no debe ir vacío")
+    @NotBlank(message = "El campo no debe ir vacio")
     @Column(name = "email")
     private String email;
 
-    @NotBlank(message = "El rol no debe ir vacío")
+    @NotBlank(message = "El campo no debe ir vacio")
     @Column(name = "rol")
     private String rol;
 
-    @NotNull(message = "El estado no debe ir vacío")
+    @NotNull(message = "El campo no debe ir vacio")
     @Column(name = "estado")
     private Integer estado;
 
-    // GETTERS Y SETTERS
-
-    public Integer getCodigoUsuario() {
-        return codigoUsuario;
+    public Integer getCodigo_usuario() {
+        return codigo_usuario;
     }
 
-    public void setCodigoUsuario(Integer codigoUsuario) {
-        this.codigoUsuario = codigoUsuario;
+    public void setCodigousuario(Integer codigo_usuario) {
+        this.codigo_usuario = codigo_usuario;
     }
 
     public String getUsername() {
@@ -51,12 +49,12 @@ public class Usuario {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasword() {
+        return pasword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasword(String pasword) {
+        this.pasword = pasword;
     }
 
     public String getEmail() {
@@ -82,4 +80,6 @@ public class Usuario {
     public void setEstado(Integer estado) {
         this.estado = estado;
     }
+
+
 }

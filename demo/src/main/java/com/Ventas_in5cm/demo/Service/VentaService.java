@@ -1,18 +1,18 @@
 package com.Ventas_in5cm.demo.Service;
 
-import com.Ventas_in5cm.demo.Entity.Venta;
+import com.Ventas_in5cm.demo.Entity.Ventas;
 
 import java.util.List;
 
 public interface VentaService {
 
-    List<Venta> getAllVentas();
+    List<Ventas> getAllVentas();
 
-    Venta getVentasById(Integer id);
+    Ventas getVentasById(Integer id);
 
-    Venta saveVentas(Venta venta);
+    Ventas saveVentas(Ventas venta);
 
-    Venta updateVentas(Integer id, Venta venta);
+    Ventas updateVentas(Integer id, Ventas venta);
 
     void deleteVentas(Integer id);
 }

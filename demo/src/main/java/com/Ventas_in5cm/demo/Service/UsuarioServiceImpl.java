@@ -1,98 +1,84 @@
 package com.Ventas_in5cm.demo.Service;
 
-import com.Ventas_in5cm.demo.Entity.Usuario;
+import com.Ventas_in5cm.demo.Entity.Usuarios;
 import com.Ventas_in5cm.demo.Repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService {
+public class UsuarioServiceImpl implements com.Ventas_in5cm.demo.Service.UsuarioService, UserDetailsService {
 
-    @Autowired
-    private UsuarioRepository repo;
+    private final UsuarioRepository usuarioRepository;
 
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-    @Override
-    public List<Usuario> getAllUsuarios() {
-        return repo.findAll();
+    // Constructor corregido para que coincida con el nombre de la clase
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
     }
 
     @Override
-    public Usuario login(String username, String password) {
+    public List<Usuarios> getAllUsuarios() {
+        return usuarioRepository.findAll();
+    }
 
-        Optional<Usuario> optionalUser = repo.findByUsername(username);
+    @Override
+    public Usuarios getUsuariosById(Integer id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
 
-        if (optionalUser.isPresent()) {
-            Usuario u = optionalUser.get();
+    @Override
+    public Usuarios saveUsuarios(Usuarios usuarios) throws RuntimeException {
+        // Encriptando la contraseña antes de guardarla
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        usuarios.setPasword(passwordEncoder.encode(usuarios.getPasword()));
 
-            if (encoder.matches(password, u.getPassword())) {
-                return u;
-            }
+        return usuarioRepository.save(usuarios);
+    }
+
+    @Override
+    public void deleteUsuarios(Integer id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new RuntimeException("Usuario no existe");
+        }
+        usuarioRepository.deleteById(id);
+    }
+
+    @Override
+    public Usuarios updateUsuarios(Integer id, Usuarios usuarios) {
+        Usuarios existingUsuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("El usuario no existe"));
+
+        existingUsuario.setUsername(usuarios.getUsername());
+        existingUsuario.setPasword(usuarios.getPasword());  // Asegúrate de que la contraseña se establezca correctamente
+        existingUsuario.setEmail(usuarios.getEmail());
+        existingUsuario.setRol(usuarios.getRol());
+        existingUsuario.setEstado(usuarios.getEstado());
+
+        return usuarioRepository.save(existingUsuario);
+    }
+
+    // Implementación del método loadUserByUsername de UserDetailsService
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        Usuarios usuario = usuarioRepository.findByUsername(username);
+
+        if (usuario == null) {
+            throw new UsernameNotFoundException("Usuario no encontrado");
         }
 
-        return null;
-    }
-
-    @Override
-    public Usuario registrar(String username, String password) {
-
-        Optional<Usuario> existente = repo.findByUsername(username);
-
-        if (existente.isPresent()) {
-            return null;
-        }
-
-        Usuario u = new Usuario();
-        u.setUsername(username);
-        u.setPassword(encoder.encode(password));
-        u.setEmail(username + "@correo.com"); // ajusta si tienes formulario
-        u.setRol("USER");
-        u.setEstado(1);
-
-        return repo.save(u);
-    }
-
-    @Override
-    public Usuario getUsuarioById(Integer id) {
-        return repo.findById(id).orElse(null);
-    }
-
-    @Override
-    public Usuario saveUsuario(Usuario usuario) {
-        usuario.setPassword(encoder.encode(usuario.getPassword()));
-        return repo.save(usuario);
-    }
-
-    @Override
-    public Usuario updateUsuario(Integer id, Usuario usuario) {
-
-        Optional<Usuario> existing = repo.findById(id);
-
-        if (existing.isEmpty()) {
-            return null;
-        }
-
-        Usuario u = existing.get();
-
-        u.setUsername(usuario.getUsername());
-        u.setEmail(usuario.getEmail());
-        u.setRol(usuario.getRol());
-        u.setEstado(usuario.getEstado());
-
-        if (usuario.getPassword() != null && !usuario.getPassword().isEmpty()) {
-            u.setPassword(encoder.encode(usuario.getPassword()));
-        }
-
-        return repo.save(u);
-    }
-
-    @Override
-    public void deleteUsuario(Integer id) {
-        repo.deleteById(id);
+        // Asegúrate de usar un encoder para las contraseñas (en el caso de contraseñas encriptadas)
+        return new User(
+                usuario.getUsername(),
+                usuario.getPasword(),  // La contraseña debe estar encriptada
+                new ArrayList<>()
+        );
     }
 }

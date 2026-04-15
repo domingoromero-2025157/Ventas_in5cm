@@ -1,16 +1,19 @@
 package com.Ventas_in5cm.demo.Controller;
 
-import com.Ventas_in5cm.demo.Entity.Venta;
+import com.Ventas_in5cm.demo.Entity.Ventas;
+import com.Ventas_in5cm.demo.Repository.UsuarioRepository;
 import com.Ventas_in5cm.demo.Service.VentaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/ventas")
+@Controller
+@RequestMapping("api/ventas")
 public class VentaController {
 
     private final VentaService ventaService;
@@ -20,14 +23,18 @@ public class VentaController {
     }
 
     @GetMapping
-    public List<Venta> getAllVentas(){
-        return ventaService.getAllVentas();
+    public String mostrarVentas(Model model){
+
+        List<Ventas> ventas = ventaService.getAllVentas();
+        model.addAttribute("ventas", ventas);
+
+        return "ventas";
     }
 
     @PostMapping
-    public ResponseEntity<Object> createVentas(@Valid @RequestBody Venta ventas){
+    public ResponseEntity<Object> createVentas(@Valid @RequestBody Ventas ventas){
         try{
-            Venta createdVentas = ventaService.saveVentas(ventas);
+            Ventas createdVentas = ventaService.saveVentas(ventas);
             return new ResponseEntity<>(createdVentas, HttpStatus.CREATED);
         }catch (IllegalArgumentException e){
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -45,10 +52,12 @@ public class VentaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateVentas(@PathVariable Integer id, @Valid @RequestBody Venta ventas){
+    public ResponseEntity<?> updateVentas(@PathVariable Integer id, @RequestBody Ventas ventas) {
+
         try {
-            Venta actualizado = ventaService.updateVentas(id, ventas);
+            Ventas actualizado = ventaService.updateVentas(id, ventas);
             return ResponseEntity.ok(actualizado);
+
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

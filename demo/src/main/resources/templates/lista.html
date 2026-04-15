@@ -144,7 +144,7 @@
 <div class="sidebar">
     <h2><i class="fas fa-user-cog"></i> Sistema</h2>
     <a href="#"><i class="fas fa-users"></i> Usuarios</a>
-    <a href="/usuario"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a>
+    <a href="/usuarios"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a>
 </div>
 
 <!-- MAIN -->
@@ -154,7 +154,7 @@
 
     <!-- BUSCADOR -->
     <div class="search-box">
-        <input type="text" id="buscar" placeholder="Buscar usuario..." onkeyup="filtrarTabla()">
+        <input type="text" id="buscar" placeholder="Buscar usuarios..." onkeyup="filtrarTabla()">
     </div>
 
     <!-- TABLA -->
@@ -170,7 +170,7 @@
         <tbody>
         <tr th:each="u : ${usuarios}">
             <td th:text="${u.idUsuario}"></td>
-            <td th:text="${u.usuario}"></td>
+            <td th:text="${u.usuarios}"></td>
             <td>
                 <a th:href="@{'/eliminar/' + ${u.idUsuario}}">
                     <button class="btn-delete">

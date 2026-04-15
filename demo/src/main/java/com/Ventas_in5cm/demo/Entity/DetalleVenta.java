@@ -34,11 +34,11 @@ public class DetalleVenta {
 
     @ManyToOne
     @JoinColumn(name = "usuarios_codigo_usuario")
-    private Usuario usuario;
+    private Usuarios usuarios;
 
     @ManyToOne
     @JoinColumn(name = "ventas_codigo_venta")
-    private Venta venta;
+    private Ventas venta;
 
     public Integer getCodigoDetalleVenta() {
         return codigoDetalleVenta;
@@ -88,19 +88,19 @@ public class DetalleVenta {
         this.cliente = cliente;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Usuarios getUsuario() {
+        return usuarios;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario(Usuarios usuarios) {
+        this.usuarios = usuarios;
     }
 
-    public Venta getVenta() {
+    public Ventas getVenta() {
         return venta;
     }
 
-    public void setVenta(Venta venta) {
+    public void setVenta(Ventas venta) {
         this.venta = venta;
     }
 }

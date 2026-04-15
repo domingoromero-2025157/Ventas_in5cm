@@ -62,17 +62,17 @@ public class DetalleVentaServiceImpl implements DetalleVentaService {
                 detalleVenta.getCliente().getDpiCliente()
         ).orElseThrow(() -> new RuntimeException("Cliente no existe"));
 
-        Usuario usuario = usuarioRepository.findById(
-                detalleVenta.getUsuario().getCodigoUsuario()
+        Usuarios usuarios = usuarioRepository.findById(
+                detalleVenta.getUsuario().getCodigo_usuario()
         ).orElseThrow(() -> new RuntimeException("Usuario no existe"));
 
-        Venta venta = ventaRepository.findById(
+        Ventas venta = ventaRepository.findById(
                 detalleVenta.getVenta().getCodigoVenta()
         ).orElseThrow(() -> new RuntimeException("Venta no existe"));
 
         existente.setProducto(producto);
         existente.setCliente(cliente);
-        existente.setUsuario(usuario);
+        existente.setUsuario(usuarios);
         existente.setVenta(venta);
 
         return repository.save(existente);

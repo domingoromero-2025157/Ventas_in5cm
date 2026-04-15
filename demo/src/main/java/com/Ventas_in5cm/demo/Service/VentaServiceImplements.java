@@ -1,6 +1,6 @@
 package com.Ventas_in5cm.demo.Service;
 
-import com.Ventas_in5cm.demo.Entity.Venta;
+import com.Ventas_in5cm.demo.Entity.Ventas;
 import com.Ventas_in5cm.demo.Repository.VentaRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,18 +16,18 @@ public class VentaServiceImplements implements VentaService {
     }
 
     @Override
-    public List<Venta> getAllVentas(){
+    public List<Ventas> getAllVentas(){
         return ventaRepository.findAll();
     }
 
     @Override
-    public Venta getVentasById(Integer id){
+    public Ventas getVentasById(Integer id){
         return ventaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Venta no encontrada"));
     }
 
     @Override
-    public Venta saveVentas(Venta venta){
+    public Ventas saveVentas(Ventas venta){
         return ventaRepository.save(venta);
     }
 
@@ -40,8 +40,8 @@ public class VentaServiceImplements implements VentaService {
     }
 
     @Override
-    public Venta updateVentas(Integer id, Venta venta){
-        Venta existingVenta = ventaRepository.findById(id)
+    public Ventas updateVentas(Integer id, Ventas venta){
+        Ventas existingVenta = ventaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("La venta no existe"));
 
         existingVenta.setFechaVenta(venta.getFechaVenta());
