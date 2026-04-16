@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="505a05cc-e637-4713-a5fe-43d862e818bb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/Ventas_in5cm/demo/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/Ventas_in5cm/demo/Config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/Ventas_in5cm/demo/Controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/Ventas_in5cm/demo/Controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/Ventas_in5cm/demo/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/Ventas_in5cm/demo/Controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/Ventas_in5cm/demo/Controller/RegistroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/Ventas_in5cm/demo/Controller/RegistroController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/Ventas_in5cm/demo/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/Ventas_in5cm/demo/DemoApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/Ventas_in5cm/demo/Entity/Usuarios.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/Ventas_in5cm/demo/Entity/Usuarios.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/Ventas_in5cm/demo/Service/UsuarioServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/Ventas_in5cm/demo/Service/UsuarioServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/templates/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/templates/Login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/templates/Registro.html" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/templates/Registro.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/templates/home.html" afterDir="false" />
-    </list>
+    <list default="true" id="505a05cc-e637-4713-a5fe-43d862e818bb" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
