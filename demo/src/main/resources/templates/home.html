@@ -2,26 +2,23 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio - Sistema de Ventas</title>
-    <link rel="stylesheet" href="/home.css">
+    <title>Inicio</title>
+    <link rel="stylesheet" th:href="@{/home.css}">
 </head>
 <body>
 
-<!-- Barra de navegación superior -->
-<header class="navbar">
-    <h1 class="logo">Sistema de Ventas</h1>
-    <nav class="menu" role="navigation" aria-label="Menú principal">
+<header>
+    <h1>Sistema de Ventas</h1>
 
-        <a href="/clientes" class="menu-btn active">Clientes</a>
-        <a href="/detalleVenta" class="menu-btn">Detalle Venta</a>
-        <a href="/productos" class="menu-btn">Productos</a>
-        <a href="/home/usuarios" class="menu-btn">Usuarios</a>
-        <a href="/ventas" class="menu-btn">Ventas</a>
-        <a href="/" class="menu-btn">Regresar</a>
+    <nav>
+        <a th:href="@{/clientes}">Clientes</a>
+        <a th:href="@{/detalleVenta}">Detalle Venta</a>
+        <a th:href="@{/productos}">Productos</a>
+        <a th:href="@{/home/usuarios}">Usuarios</a>
+        <a th:href="@{/ventas}">Ventas</a>
+        <a th:href="@{/}">Regresar</a>
     </nav>
 </header>
-
 
 </body>
 </html>

@@ -5,11 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table (name = "usuarios")
+@Table(name = "usuarios")
 public class Usuarios {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "codigo_usuario")
     private Integer codigo_usuario;
 
@@ -37,16 +37,8 @@ public class Usuarios {
         return codigo_usuario;
     }
 
-    public void setCodigousuario(Integer codigo_usuario) {
+    public void setCodigo_usuario(Integer codigo_usuario) {
         this.codigo_usuario = codigo_usuario;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPasword() {
@@ -55,6 +47,14 @@ public class Usuarios {
 
     public void setPasword(String pasword) {
         this.pasword = pasword;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -80,6 +80,4 @@ public class Usuarios {
     public void setEstado(Integer estado) {
         this.estado = estado;
     }
-
-
 }
